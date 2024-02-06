@@ -149,6 +149,18 @@ const Home: NextPage = () => {
 
   const getEthereumActions = (): AccountAction[] => {
     const actions = {
+      [DEFAULT_EIP155_OPTIONAL_METHODS.WALLET_ADD_ETHEREUM_CHAIN]: {
+        method: DEFAULT_EIP155_OPTIONAL_METHODS.WALLET_ADD_ETHEREUM_CHAIN,
+        callback: async (chainId: string, address: string) => {
+          await ethereumRpc.testAddChain(chainId, address)
+        },
+      },
+      [DEFAULT_EIP155_OPTIONAL_METHODS.WALLET_SWITCH_ETHEREUM_CHAIN]: {
+        method: DEFAULT_EIP155_OPTIONAL_METHODS.WALLET_SWITCH_ETHEREUM_CHAIN,
+        callback: async (chainId: string, address: string) => {
+          await ethereumRpc.testSwitchChain(chainId, address)
+        },
+      },
       [DEFAULT_EIP155_METHODS.ETH_SEND_TRANSACTION]: {
         method: DEFAULT_EIP155_METHODS.ETH_SEND_TRANSACTION,
         callback: async (chainId: string, address: string) => {
