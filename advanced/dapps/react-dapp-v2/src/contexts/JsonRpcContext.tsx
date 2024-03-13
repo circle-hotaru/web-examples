@@ -469,7 +469,9 @@ export function JsonRpcContextProvider({
     ),
     testSignTypedData: _createJsonRpcRequestHandler(
       async (chainId: string, address: string) => {
-        const message = JSON.stringify(eip712.example)
+        const example = eip712.example
+        example.domain.chainId = Number(chainId.split(':')[1])
+        const message = JSON.stringify(example)
 
         // eth_signTypedData params
         const params = [address, message]
@@ -512,8 +514,9 @@ export function JsonRpcContextProvider({
     ),
     testSignTypedDatav4: _createJsonRpcRequestHandler(
       async (chainId: string, address: string) => {
-        const message = JSON.stringify(eip712.example)
-        console.log('eth_signTypedData_v4')
+        const example = eip712.example
+        example.domain.chainId = Number(chainId.split(':')[1])
+        const message = JSON.stringify(example)
 
         // eth_signTypedData_v4 params
         const params = [address, message]
